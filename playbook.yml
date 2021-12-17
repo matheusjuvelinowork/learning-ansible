@@ -1,8 +1,7 @@
 ---
 - name: test k8s
   hosts: localhost
-  become: yes
-  ansible_facts: false
+  gather_facts: false
   tasks:
   - name: Create a k8s namespace
     kubernetes.core.k8s:
