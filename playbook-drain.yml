@@ -16,6 +16,7 @@
             name: kind-worker2
             delete_options:
               ignore_daemonsets: true
+              terminate_grace_period: 9
         - set_fact: 
             add_info: "AWX:DATA:SUCCESS= Drain realizado com sucesso."
         - debug:
