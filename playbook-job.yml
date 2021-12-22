@@ -17,9 +17,6 @@
             kind: Deployment
             namespace: default
             replicas: 0
-            register: output
-        - debug:
-            var: output
         - set_fact: 
             add_info: "AWX:DATA:SUCCESS= Quantidade de pods alterada com sucesso."
         - debug:
