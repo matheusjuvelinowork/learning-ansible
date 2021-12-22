@@ -8,41 +8,30 @@
     - kubernetes.core
 
   tasks:
-
     - name: Alterar quantidade de pods
-    
-    # --------------------------------------------------
-    block:
-    # --------------------------------------------------
-      - name: Para zero
-        k8s_scale:
-          name: nginx-deployment
-          api_version: v1
-          kind: Deployment
-          namespace: default
-          replicas: 0
-          register: output
-    
-      - debug:
-          var: output
-
-      - set_fact: 
-          add_info: "AWX:DATA:SUCCESS= Quantidade de pods alterada com sucesso."
-        
-      - debug:
-          msg: 
-            - "{{ add_info }}"
-
-      - set_fact:
-          state: 'true'
-        
-    # --------------------------------------------------      
-    rescue:
-    # -------------------------------------------------- 
-      - set_fact:
-          msg_result: "AWX:ERROR:MSG= Falha ao alterar quantidade de pods"
-      - fail:
-          msg: "{{ msg_result }}"
-          
-      - set_fact:
-          state: 'false'
+      block:
+        - name: Para zero
+          k8s_scale:
+            name: nginx-deployment
+            api_version: v1
+            kind: Deployment
+            namespace: default
+            replicas: 0
+            register: output
+        - debug:
+            var: output
+        - set_fact: 
+            add_info: "AWX:DATA:SUCCESS= Quantidade de pods alterada com sucesso."
+        - debug:
+            msg: 
+              - "{{ add_info }}"
+        - set_fact:
+            state: 'true'    
+      rescue:
+        - set_fact:
+            msg_result: "AWX:ERROR:MSG= Falha ao alterar quantidade de pods"
+        - fail:
+            msg: "{{ msg_result }}"
+            
+        - set_fact:
+            state: 'false'
