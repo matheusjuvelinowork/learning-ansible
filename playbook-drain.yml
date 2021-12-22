@@ -13,6 +13,7 @@
         - name: Drain no node kind-worker
           k8s_drain:
             state: drain
+            name: kind-worker
         - set_fact: 
             add_info: "AWX:DATA:SUCCESS= Drain realizado com sucesso."
         - debug:
