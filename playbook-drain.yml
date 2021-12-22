@@ -17,6 +17,7 @@
             delete_options:
               ignore_daemonsets: true
               terminate_grace_period: 9
+              force: true
         - set_fact: 
             add_info: "AWX:DATA:SUCCESS= Drain realizado com sucesso."
         - debug:
