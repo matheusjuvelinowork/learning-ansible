@@ -1,0 +1,30 @@
+---
+- name: drain k8s
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  collections:
+    - kubernetes.core
+
+  tasks:
+    - name: Realizar drain
+      block:
+        - name: Drain no node kind-worker
+          k8s_drain:
+            state: drain
+        - set_fact: 
+            add_info: "AWX:DATA:SUCCESS= Drain realizado com sucesso."
+        - debug:
+            msg: 
+              - "{{ add_info }}"
+        - set_fact:
+            state: 'true'    
+      rescue:
+        - set_fact:
+            msg_result: "AWX:ERROR:MSG= Falha ao realizar drain."
+        - fail:
+            msg: "{{ msg_result }}"
+            
+        - set_fact:
+            state: 'false'
