@@ -13,7 +13,7 @@
         - name: Drain no node kind-worker
           k8s_drain:
             state: cordon
-            name: kind-worker
+            name: kind-worker2
         - set_fact: 
             add_info: "AWX:DATA:SUCCESS= Cordon realizado com sucesso."
         - debug:

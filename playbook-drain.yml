@@ -13,7 +13,7 @@
         - name: Drain no node kind-worker
           k8s_drain:
             state: drain
-            name: kind-worker
+            name: kind-worker2
             delete_options:
               ignore_daemonsets: true
         - set_fact: 
