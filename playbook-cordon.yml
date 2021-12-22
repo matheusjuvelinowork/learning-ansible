@@ -1,0 +1,31 @@
+---
+- name: cordon k8s
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  collections:
+    - kubernetes.core
+
+  tasks:
+    - name: Realizar cordon
+      block:
+        - name: Drain no node kind-worker
+          k8s_drain:
+            state: cordon
+            name: kind-worker
+        - set_fact: 
+            add_info: "AWX:DATA:SUCCESS= Cordon realizado com sucesso."
+        - debug:
+            msg: 
+              - "{{ add_info }}"
+        - set_fact:
+            state: 'true'    
+      rescue:
+        - set_fact:
+            msg_result: "AWX:ERROR:MSG= Falha ao realizar cordon."
+        - fail:
+            msg: "{{ msg_result }}"
+            
+        - set_fact:
+            state: 'false'
