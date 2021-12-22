@@ -1,5 +1,5 @@
 ---
-- name: job k8s
+- name: pods k8s
   hosts: localhost
   connection: local
   gather_facts: false
