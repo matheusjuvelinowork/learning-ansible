@@ -17,8 +17,8 @@
             name: nginx-deployment
             patch:
               - op: merge
-                path: /spec/metadata/annotations/kubectl.kubernetes.io\/restartedAt
-                value: '2022-01-07T13:28:00-03:00'
+                path: /spec/metadata/annotations/kubectl.kubernetes.io//restartedAt
+                value: '2022-01-07T13:32:00-03:00'
           register: result
         - debug:
             var: result
