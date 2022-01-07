@@ -4,16 +4,12 @@
   connection: local
   gather_facts: false
 
-  collections:
-    - kubernetes.core
 
   tasks:
     - name: Executar redeploy
       block:
         - name: Para deployment
-          k8s:
-            kubectl_extra_args: rollout restart deployment nginx-deployment
-            kubectl_namespace: default
+          shell: kubectl rollout restart deployment nginx-deployment
           register: result
         - debug:
             var: result
