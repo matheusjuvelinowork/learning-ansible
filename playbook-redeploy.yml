@@ -1,0 +1,34 @@
+---
+- name: redeploy k8s
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  collections:
+    - kubernetes.core
+
+  tasks:
+    - name: Executar redeploy
+      block:
+        - name: Para deployment
+          kubectl:
+            kubectl_extra_args: rollout restart deployment nginx-deployment
+            kubectl_namespace: default
+          register: result
+        - debug:
+            var: result
+        - set_fact: 
+            add_info: "AWX:DATA:SUCCESS= Execução de redeploy com sucesso."
+        - debug:
+            msg: 
+              - "{{ add_info }}"
+        - set_fact:
+            state: 'true'    
+      rescue:
+        - set_fact:
+            msg_result: "AWX:ERROR:MSG= Execução de redeploy com erro"
+        - fail:
+            msg: "{{ msg_result }}"
+            
+        - set_fact:
+            state: 'false'
