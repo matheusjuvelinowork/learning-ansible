@@ -8,7 +8,9 @@
     - kubernetes.core
 
   tasks:
-    - debug: msg="{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}-03:00"
+    - name: Ansible fact - ansible_date_time
+      debug:
+      var: ansible_date_time
     - name: Executar redeploy
       block:
         - name: Para deployment
@@ -21,7 +23,7 @@
                 path: /spec/template/metadata/annotations
                 # value: {'kubectl.kubernetes.io/restartedAt':'2022-01-07T14:12:00-03:00'}
                 # value: {"kubectl.kubernetes.io/restartedAt":"{{ lookup('pipe','date +%Y:%m:%dT%H:%M:%S') }}-03:00"}
-                value: {"kubectl.kubernetes.io/restartedAt": " {{ ansible_date_time.iso8601 }} " }
+                value: {"kubectl.kubernetes.io/restartedAt": " {{ ansible_date_time.iso8601 }} "}
           register: result
         - debug:
             var: result
