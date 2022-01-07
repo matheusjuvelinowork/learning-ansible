@@ -11,7 +11,7 @@
     - name: Executar redeploy
       block:
         - name: Para deployment
-          kubectl:
+          k8s:
             kubectl_extra_args: rollout restart deployment nginx-deployment
             kubectl_namespace: default
           register: result
