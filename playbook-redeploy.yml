@@ -9,7 +9,7 @@
     - name: Executar redeploy
       block:
         - name: Para deployment
-          shell: 'curl -v -XPATCH  -H "Accept: application/json, */*" -H "Content-Type: application/strategic-merge-patch+json" -H "User-Agent: kubectl/v1.22.3 (linux/amd64) kubernetes/c920368" "https://127.0.0.1:55093/apis/apps/v1/namespaces/default/deployments/nginx-deployment?fieldManager=kubectl-rollout"'
+          shell: 'curl -v -XPATCH  -H "Accept: application/json, */*" -H "Content-Type: application/strategic-merge-patch+json" -H "User-Agent: kubectl/v1.22.3 (linux/amd64) kubernetes/c920368" "https://kubernetes/apis/apps/v1/namespaces/default/deployments/nginx-deployment?fieldManager=kubectl-rollout"'
           register: result
         - debug:
             var: result
