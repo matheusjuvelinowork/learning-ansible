@@ -2,7 +2,7 @@
 - name: redeploy k8s
   hosts: localhost
   connection: local
-  gather_facts: false
+  gather_facts: true
 
   collections:
     - kubernetes.core
