@@ -8,6 +8,7 @@
     - kubernetes.core
 
   tasks:
+    - debug: msg="{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}-03:00"
     - name: Executar redeploy
       block:
         - name: Para deployment
@@ -18,7 +19,7 @@
             patch:
               - op: replace
                 path: /spec/template/metadata/annotations
-                value: {'kubectl.kubernetes.io/restartedAt':'2022-01-07T14:12:00-03:00'}
+                value: {"kubectl.kubernetes.io/restartedAt":"{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}-03:00"}
           register: result
         - debug:
             var: result
